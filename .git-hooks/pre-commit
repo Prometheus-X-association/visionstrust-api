@@ -1,0 +1,50 @@
+#!/bin/bash
+
+RED="\e[31m"
+GREEN="\e[32m"
+ENDCOLOR="\e[0m"
+
+STAGED_FILES=$(git diff --cached --name-only --diff-filter=ACMR | sed 's| |\\ |g')
+
+echo "Running pre-commit hook"
+
+# run linter on staged files
+echo "
+> Running Linter..⚒️⚒️⚒️
+"
+./node_modules/.bin/eslint $STAGED_FILES "src/**/*.{ts,js}" --quiet --fix
+LINTER_EXIT_CODE=$?
+
+echo "
+> Running prettier...✨✨✨
+"
+./node_modules/.bin/prettier $STAGED_FILES --ignore-unknown --write
+
+# Add fixed files
+git add -f $STAGED_FILES
+
+# Ensure linter has passed
+if [ $LINTER_EXIT_CODE -ne 0 ]; then
+    echo -e "${RED}Lint failed, fix errors before attempting to commit.${ENDCOLOR}"
+    exit 1
+else
+    echo -e "${GREEN}Lint success ${ENDCOLOR}👌"
+fi
+
+echo "
+> Running Tests...
+"
+
+./node_modules/.bin/ts-mocha -p tsconfig.json tests/**/*.spec.ts
+
+MOCHA_EXIT_CODE=$?
+
+if [ $MOCHA_EXIT_CODE -ne 0 ]; then
+    echo -e "${RED}Tests must pass before commit.${ENDCOLOR}"
+    exit 1
+else
+    echo -e "${GREEN}Tests passed${ENDCOLOR}"
+fi
+
+echo -e "${GREEN}All done and ready to commit ! 🎉${ENDCOLOR}"
+exit 0

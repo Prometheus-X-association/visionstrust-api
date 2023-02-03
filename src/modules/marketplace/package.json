@@ -1,0 +1,19 @@
+{
+    "name": "marketplace",
+    "version": "1.1.0",
+    "description": "Marketplace helper module",
+    "main": "index.js",
+    "directories": {
+        "lib": "lib"
+    },
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [
+        "visions",
+        "visionstrust",
+        "marketplace"
+    ],
+    "author": "Felix Bole <felix@visionspol.eu>",
+    "license": "ISC"
+}

@@ -1,0 +1,2110 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "VisionsTrust",
+        "description": "Official VisionsTrust API documentation. Please check the [complete documentation](https://visionstrust.com/public/docs) as well.",
+        "version": "2.0.0",
+        "contact": {
+            "name": "API Support",
+            "email": "felix@visionspol.eu"
+        },
+        "externalDocs": {
+            "description": "Get our complete documentation.",
+            "url": "https://visionstrust.com/public/docs"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://visionstrust.com/v1",
+            "description": "Main server - Production"
+        },
+        {
+            "url": "https://staging.visionstrust.com/v1",
+            "description": "Test server - Staging"
+        }
+    ],
+    "components": {
+        "schemas": {
+            "User": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The user's id in Visionstrust."
+                    },
+                    "email": {
+                        "type": "string",
+                        "description": "The user's email."
+                    },
+                    "userServiceId": {
+                        "type": "string",
+                        "description": "The user's id in your service."
+                    },
+                    "userKey": {
+                        "type": "string",
+                        "descrition": "The user's user key that was generated on the creation of the user."
+                    },
+                    "emailVerified": {
+                        "type": "boolean",
+                        "description": "Whether the user's email (account) has been verified or not."
+                    }
+                }
+            },
+
+            "Service-owned": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "logo": {
+                        "type": "string"
+                    },
+                    "datatypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DataType"
+                        },
+                        "description": "The DataTypes made available for exchange by the Service."
+                    },
+                    "endpoints": {
+                        "type": "object",
+                        "properties": {
+                            "consentExport": {
+                                "type": "string",
+                                "description": "The endpoint for the export of the consent during a data exchange."
+                            },
+                            "consentImport": {
+                                "type": "string",
+                                "description": "The endpoint for the import of the consent during a data exchange."
+                            },
+                            "dataExport": {
+                                "type": "string",
+                                "description": "The endpoint for the export of data during a data exchange."
+                            },
+                            "dataImport": {
+                                "type": "string",
+                                "description": "The endpoint for the import of data during a data exchange."
+                            },
+                            "registerURL": {
+                                "type": "string",
+                                "description": "The url used to register users on the service's platform."
+                            },
+                            "authURL": {
+                                "type": "string",
+                                "description": "The url used for authentication if the service uses OAuth"
+                            },
+                            "requestToken": {
+                                "type": "string",
+                                "description": "The request token url used when a service uses OAuth"
+                            }
+                        }
+                    },
+                    "urls": {
+                        "type": "object",
+                        "properties": {
+                            "website": {
+                                "type": "string"
+                            },
+                            "termsOfUse": {
+                                "type": "string"
+                            },
+                            "legalNotices": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "governance": {
+                        "type": "object",
+                        "properties": {
+                            "registration": {
+                                "type": "string"
+                            },
+                            "address": {
+                                "type": "string"
+                            },
+                            "legalRepresentative": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "profession": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "DPO": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "serviceKey": {
+                        "type": "string",
+                        "description": "Your service key."
+                    },
+                    "serviceSecretKey": {
+                        "type": "string",
+                        "description": "Your service secret key."
+                    },
+                    "visions": {
+                        "type": "object",
+                        "properties": {
+                            "clientId": {
+                                "type": "string",
+                                "description": "Your Visions client ID."
+                            },
+                            "secretKey": {
+                                "type": "string",
+                                "description": "Your Visions secret key."
+                            }
+                        }
+                    }
+                }
+            },
+
+            "Service-other": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string"
+                    },
+                    "logo": {
+                        "type": "string"
+                    },
+                    "datatypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DataType"
+                        },
+                        "description": "The DataTypes made available for exchange by the Service."
+                    },
+                    "endpoints": {
+                        "type": "object",
+                        "properties": {
+                            "consentExport": {
+                                "type": "string",
+                                "description": "The endpoint for the export of the consent during a data exchange."
+                            },
+                            "consentImport": {
+                                "type": "string",
+                                "description": "The endpoint for the import of the consent during a data exchange."
+                            },
+                            "dataExport": {
+                                "type": "string",
+                                "description": "The endpoint for the export of data during a data exchange."
+                            },
+                            "dataImport": {
+                                "type": "string",
+                                "description": "The endpoint for the import of data during a data exchange."
+                            },
+                            "registerURL": {
+                                "type": "string",
+                                "description": "The url used to register users on the service's platform."
+                            },
+                            "authURL": {
+                                "type": "string",
+                                "description": "The url used for authentication if the service uses OAuth"
+                            },
+                            "requestToken": {
+                                "type": "string",
+                                "description": "The request token url used when a service uses OAuth"
+                            }
+                        }
+                    },
+                    "urls": {
+                        "type": "object",
+                        "properties": {
+                            "website": {
+                                "type": "string"
+                            },
+                            "termsOfUse": {
+                                "type": "string"
+                            },
+                            "legalNotices": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "governance": {
+                        "type": "object",
+                        "properties": {
+                            "registration": {
+                                "type": "string"
+                            },
+                            "address": {
+                                "type": "string"
+                            },
+                            "legalRepresentative": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    },
+                                    "profession": {
+                                        "type": "string"
+                                    }
+                                }
+                            },
+                            "DPO": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string"
+                                    },
+                                    "email": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+
+            "DataType": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string"
+                    },
+                    "name": {
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    },
+                    "provenance": {
+                        "type": "string"
+                    },
+                    "conservation": {
+                        "type": "object",
+                        "properties": {
+                            "type": {
+                                "type": "string",
+                                "description": "Conservation type of the data."
+                            },
+                            "unit": {
+                                "type": "string",
+                                "description": "Conservation unit for the data."
+                            },
+                            "length": {
+                                "type": "string",
+                                "description": "Conservation length of the data."
+                            },
+                            "description": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "frequency": {
+                        "type": "object",
+                        "properties": {
+                            "unit": {
+                                "type": "string",
+                                "description": "Frequency unit for the data."
+                            },
+                            "value": {
+                                "type": "string"
+                            },
+                            "repeats": {
+                                "type": "boolean"
+                            }
+                        }
+                    }
+                }
+            },
+
+            "Purpose": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "string",
+                        "description": "The id of the Purpose."
+                    },
+                    "name": {
+                        "type": "string",
+                        "description": "The name of the Purpose."
+                    },
+                    "service": {
+                        "type": "string",
+                        "description": "The service to which the Purpose belongs."
+                    },
+                    "datatypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DataType"
+                        }
+                    },
+                    "importedDatatypes": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/DataType"
+                        }
+                    }
+                }
+            },
+
+            "ApiErrorResponse": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "number",
+                        "description": "The response status code."
+                    },
+                    "error": {
+                        "type": "string",
+                        "description": "The error code."
+                    },
+                    "message": {
+                        "type": "string",
+                        "description": "The error message description."
+                    },
+                    "path": {
+                        "type": "string",
+                        "description": "The path to which the request was made."
+                    },
+                    "details": {
+                        "type": "string",
+                        "description": "The details of the error if any are specified. Could be null."
+                    },
+                    "timestamp": {
+                        "type": "string",
+                        "description": "The timestamp at which the request was made."
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "BearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT",
+                "description": "For help on how to create your bearer auth JWT token, please refer to the [Documentation](https://docs.google.com/document/d/1rkPIGh-8Hi0yhKiJLNxMp5mf9jCzWGmHbTMFoCgQbUs/edit#bookmark=kix.nxwyputs3i4d)"
+            },
+            "AuthToken": {
+                "type": "apiKey",
+                "in": "header",
+                "name": "x-auth-token",
+                "description": "For help on how to create your x-auth-token, please refer to the [Documentation](https://docs.google.com/document/d/1rkPIGh-8Hi0yhKiJLNxMp5mf9jCzWGmHbTMFoCgQbUs/edit#bookmark=kix.nxwyputs3i4d)"
+            }
+        },
+        "responses": {
+            "UnauthorizedError": {
+                "description": "Authorization token is missing or invalid."
+            },
+
+            "ExistingResourceError": {
+                "description": "Existing Resource Error",
+                "content": {
+                    "application/json": {
+                        "schema": {
+                            "$ref": "#/components/schemas/ApiErrorResponse"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "tags": [
+        "Users",
+        "DataTypes",
+        "Services",
+        "Purposes",
+        "Popups",
+        "Consents",
+        "Exchanges"
+    ],
+    "security": [{ "BearerAuth": [] }, { "AuthToken": [] }],
+    "paths": {
+        "/users": {
+            "get": {
+                "summary": "Get all users in your service.",
+                "description": "Returns the list of all the user identifiers from your service.",
+                "tags": ["Users"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/User"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "No users found for your service."
+                    }
+                }
+            },
+            "post": {
+                "summary": "Creates a user for given email",
+                "description": "Creates a user identifier linked to your service. Is mandatory for a user to be able to exchange data from or to your service.",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user for which you wish to create an identifier."
+                                    },
+                                    "userServiceId": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The id of the user inside your service (database). This is useful for us to inform you which user's data to share during a data exchange."
+                                    },
+                                    "endpoints": {
+                                        "required": false,
+                                        "description": "The endpoints specific to that user if you are using a per-user url system. Not setting any will default to your base defined endpoints set in your service settings.",
+                                        "type": "object",
+                                        "properties": {
+                                            "consentImport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The consent import endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "consentExport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The consent export endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "dataImport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The data import endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "dataExport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The data export endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "User identifier created. You might want to save the generated userKey to your user for whenever this user will want to make data exchanges. Otherwise, you will have to GET the userKey every time you wish to make a data exchange for this user.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "404": {
+                        "description": "Service not found. Verify your service key and try again."
+                    },
+                    "409": {
+                        "description": "Existing user error"
+                    }
+                }
+            }
+        },
+        "/users/id/{id}": {
+            "get": {
+                "summary": "Get a user's infomation by id",
+                "description": "Returns the information about the user with the given email",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "id",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user's Visions identifier id",
+                        "example": "6648c5c9a86baaid7ecefcb0"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        },
+        "/users/{email}": {
+            "get": {
+                "summary": "Get a user's infomation by email",
+                "description": "Returns the information about the user with the given email",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user's email used when creating the user.",
+                        "example": "johndoe@gmail.com"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        },
+        "/users/{userKey}": {
+            "put": {
+                "summary": "Updates the User's email",
+                "description": "Updates the email for the user with the given userKey.",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userKey",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user's userKey that was created upon creation of the user."
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "required": false,
+                                        "type": "string",
+                                        "description": "The new email to update the User."
+                                    },
+                                    "endpoints": {
+                                        "required": false,
+                                        "description": "The endpoints specific to that user if you are using a per-user url system. Not setting any will default to your base defined endpoints set in your service settings.",
+                                        "type": "object",
+                                        "properties": {
+                                            "consentImport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The consent import endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "consentExport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The consent export endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "dataImport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The data import endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            },
+                                            "dataExport": {
+                                                "required": false,
+                                                "type": "array",
+                                                "description": "The data export endpoints specific to that user. This can be a single entry if you use a single url per user, or can have several entries if you use a per-user per-service url.",
+                                                "items": {
+                                                    "type": "object",
+                                                    "properties": {
+                                                        "serviceId": {
+                                                            "type": "string",
+                                                            "description": "Can be null if you use a single url per user, otherwise, the id of the service for which you use this url."
+                                                        },
+                                                        "url": {
+                                                            "type": "string",
+                                                            "description": "The actual url."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/User"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "User identifier not found."
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Deletes the user",
+                "description": "Deletes the user given the userKey.",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "userKey",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user's userKey that was created upon creation of the user."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "User successfully deleted."
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "User identifier not found."
+                    }
+                }
+            }
+        },
+        "/users/usecases/{email}": {
+            "get": {
+                "summary": "Get the information on a user for specific use cases",
+                "description": "Returns the information about the user with the given email. The list of existing experiences / use cases can be found in your VisionsTrust account in the Espace Expériences page.",
+                "tags": ["Users"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "email",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The user's email.",
+                        "example": "johndoe@gmail.com"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "isVisionsUser": {
+                                            "type": "boolean",
+                                            "description": "Specifies if the user with this email from your service is registered in Visions"
+                                        },
+                                        "activeUseCase": {
+                                            "type": "string",
+                                            "description": "Specifies which is the ongoing use case for that user. Null if none is active",
+                                            "example": "bilan-orientation"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "User not found."
+                    }
+                }
+            }
+        },
+        "/users/userjourney": {
+            "post": {
+                "summary": "Marks the user's journey on a platform as done.",
+                "description": "Used mainly inside the ReOrientation project, marks the user's experience on a platform as done. Usually called from the platform's frontend to indicate that the user has manually clicked a 'I'm done' button.",
+                "tags": ["Users"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "email": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user logged in to your platform and that has a Visions Identifier"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "User journey successfully updated. You can now redirect the user back to VisionsGalaxy using the redirectUrl in the response body.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "redirectUrl": {
+                                            "type": "string",
+                                            "description": "The VisionsGalaxy url to redirect the user to."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "404": {
+                        "description": "User not found, make sure the user is a registered Visions user."
+                    }
+                }
+            }
+        },
+
+        "/purposes/info/{purposeId}": {
+            "get": {
+                "summary": "Get detailed information about your purpose.",
+                "description": "Returns detailed information about your purpose, including the datatypes and imported datatypes it uses.",
+                "tags": ["Purposes"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "purposeId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The ID of the purpose for which you wish to get information"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Purpose"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "Purpose not found"
+                    }
+                }
+            }
+        },
+        "/purposes/list": {
+            "get": {
+                "summary": "Get the list of your purposes",
+                "description": "Returns the list of all your created purposes",
+                "tags": ["Purposes"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "id": {
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "type": "string"
+                                            },
+                                            "description": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "Could not find any purposes for your service."
+                    }
+                }
+            }
+        },
+        "/purposes/list/exchanges": {
+            "get": {
+                "summary": "Get the list of services that you can get purpose info from.",
+                "description": "Returns the list of service names with who you have configured exchanges for purposes. You can then use the service names to gather purpose info from that service with the /purpose/list/{service} GET request.",
+                "tags": ["Purposes"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "string"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "403": {
+                        "description": "You have no configured exchange authorization with the given service"
+                    },
+                    "404": {
+                        "description": "No configured exchange was found with this service."
+                    }
+                }
+            }
+        },
+        "/purposes/list/exchanges/{serviceName}": {
+            "get": {
+                "summary": "Get the list of configured purposes with the given service",
+                "description": "Returns the complete list of possible purposes  configured with the given service.",
+                "tags": ["Purposes"],
+                "operationId": "getPurposeListForService",
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "serviceName",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The name of the service for which you wish to get the configured purposes information. The name is case sensitive.",
+                        "example": "Jobready"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "purposeName": {
+                                                "type": "string"
+                                            },
+                                            "purposeId": {
+                                                "type": "string"
+                                            },
+                                            "owner": {
+                                                "type": "string"
+                                            },
+                                            "import": {
+                                                "type": "boolean",
+                                                "description": "If this purpose is configured for an import exchange"
+                                            },
+                                            "export": {
+                                                "type": "string",
+                                                "description": "If this purpose is configured for an export exchange"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "Service not found"
+                    }
+                }
+            }
+        },
+
+        "/popups": {
+            "get": {
+                "summary": "Get all exchange popups.",
+                "description": "Returns complete information to generate any of the possible exchange popups.",
+                "tags": ["Popups"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "export": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "service": {
+                                                        "type": "string",
+                                                        "description": "The name of the service."
+                                                    },
+                                                    "purposes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "flow": {
+                                                                    "type": "string",
+                                                                    "description": "To know if this is a purpose configured for export or import.",
+                                                                    "example": "export"
+                                                                },
+                                                                "popupRequestEndpoint": {
+                                                                    "type": "string",
+                                                                    "description": "The endpoint to make a request to to generate the popup for this purpose.",
+                                                                    "example": "https://visionstrust.com/v1/popup/export"
+                                                                },
+                                                                "popupRequestMethod": {
+                                                                    "type": "string"
+                                                                },
+                                                                "details": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "import": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "service": {
+                                                        "type": "string",
+                                                        "description": "The name of the service."
+                                                    },
+                                                    "purposes": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "object",
+                                                            "properties": {
+                                                                "name": {
+                                                                    "type": "string"
+                                                                },
+                                                                "id": {
+                                                                    "type": "string"
+                                                                },
+                                                                "flow": {
+                                                                    "type": "string",
+                                                                    "description": "To know if this is a purpose configured for export or import.",
+                                                                    "example": "import"
+                                                                },
+                                                                "popupRequestEndpoint": {
+                                                                    "type": "string",
+                                                                    "description": "The endpoint to make a request to to generate the popup for this purpose.",
+                                                                    "example": "https://visionstrust.com/v1/popup/import"
+                                                                },
+                                                                "popupRequestMethod": {
+                                                                    "type": "string"
+                                                                },
+                                                                "details": {
+                                                                    "type": "string"
+                                                                }
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    }
+                }
+            }
+        },
+        "/popups/templates": {
+            "get": {
+                "summary": "Get HTML popup templates.",
+                "description": "Returns HTML examples of export and import consent popups.",
+                "tags": ["Popups"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "text/html": {
+                                "description": "HTML consent popup examples for export and import data exchanges. You are free to make your own design if these examples do not fit your platform's design and style."
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    }
+                }
+            }
+        },
+        "/popups/import": {
+            "post": {
+                "summary": "Generates import exchange data for specified purpose",
+                "description": "Finds the exchange data configured for this purpose. Returns the list of services for which an exchange has been configured with this purpose.",
+                "tags": ["Popups"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "emailImport": {
+                                        "type": "string",
+                                        "required": true,
+                                        "description": "The email of the user that is currently logged in to your platform. The user for who the data exchange info will be loaded."
+                                    },
+                                    "purpose": {
+                                        "type": "string",
+                                        "required": true,
+                                        "description": "The purpose ID for which you wish to load the exchange data."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The exchange data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "purpose": {
+                                            "type": "string",
+                                            "description": "The name of the Purpose"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "description": "The description of the Purpose"
+                                        },
+                                        "tosImport": {
+                                            "type": "string",
+                                            "description": "The URL to the Terms of your service"
+                                        },
+                                        "infoText": {
+                                            "type": "string",
+                                            "description": "The information text to show on the popup. Ideally inside a hoverable icon."
+                                        },
+                                        "exportServices": {
+                                            "description": "The list of services available for exchange.",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "serviceName": {
+                                                        "type": "string",
+                                                        "description": "The name of the service"
+                                                    },
+                                                    "logo": {
+                                                        "type": "string",
+                                                        "description": "The URL to the logo of the service"
+                                                    },
+                                                    "termsOfUse": {
+                                                        "type": "string",
+                                                        "description": "The URL to the Terms of the service"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "datatypes": {
+                                            "description": "The list of datatypes to show on the popup",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "provenance": {
+                                                        "type": "string",
+                                                        "description": "The service that owns the datatype."
+                                                    },
+                                                    "checked": {
+                                                        "type": "boolean",
+                                                        "description": "Whether or not it should be checked in the popup or not. Refers to the user's last given consent for this datatype."
+                                                    },
+                                                    "serviceExport": {
+                                                        "type": "string",
+                                                        "description": "The service that owns the datatype."
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "emailsExport": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "email": {
+                                                        "type": "string"
+                                                    },
+                                                    "service": {
+                                                        "type": "string"
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "authUrls": {
+                                            "description": "The list of Auth URLS of the export services IF they use OAUTH",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized. The purpose does not belong to your service"
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+        "/popups/export": {
+            "post": {
+                "summary": "Generates export exchange data for specified purpose",
+                "description": "Finds the exchange data configured for this purpose. Returns the data to load the export exchange info popup.",
+                "tags": ["Popups"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "emailExport": {
+                                        "type": "string",
+                                        "description": "The email of the user that is currently logged in to your platform. The user for who the data exchange info will be loaded."
+                                    },
+                                    "purpose": {
+                                        "type": "string",
+                                        "description": "The purpose ID for which you wish to load the exchange data."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "The exchange data",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "purpose": {
+                                            "type": "string",
+                                            "description": "The name of the Purpose"
+                                        },
+                                        "description": {
+                                            "type": "string",
+                                            "description": "The description of the Purpose"
+                                        },
+                                        "serviceImport": {
+                                            "type": "string",
+                                            "description": "The name of the import service"
+                                        },
+                                        "serviceImportLogo": {
+                                            "type": "string",
+                                            "description": "The URL to the logo of the import service"
+                                        },
+                                        "tosImport": {
+                                            "type": "string",
+                                            "description": "The URL to the Terms of the service importing your data"
+                                        },
+                                        "tosExport": {
+                                            "type": "string",
+                                            "description": "The URL to the Terms of your service"
+                                        },
+                                        "infoText": {
+                                            "type": "string",
+                                            "description": "The information text to show on the popup. Ideally inside a hoverable icon."
+                                        },
+                                        "datatypes": {
+                                            "description": "The list of datatypes to show on the popup",
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "id": {
+                                                        "type": "string"
+                                                    },
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "description": {
+                                                        "type": "string"
+                                                    },
+                                                    "provenance": {
+                                                        "type": "string",
+                                                        "description": "The service that owns the datatype."
+                                                    },
+                                                    "checked": {
+                                                        "type": "boolean",
+                                                        "description": "Whether or not it should be checked in the popup or not. Refers to the user's last given consent for this datatype."
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "emailImport": {
+                                            "type": "string",
+                                            "description": "If found, the email of the user in the import service. If empty, you should request the email of the user in the import service within the popup."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+
+        "/consents/exchange/import": {
+            "post": {
+                "summary": "Start import exchange.",
+                "description": "Creates a consent for the selected data and starts the import exchange process.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "datatypes": {
+                                        "required": true,
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "The id of the datatype that you received when generating the popup."
+                                                },
+                                                "datatype": {
+                                                    "type": "string",
+                                                    "description": "The name of the datatype as you received it."
+                                                },
+                                                "checked": {
+                                                    "type": "boolean",
+                                                    "description": "If it has been selected or not by the user."
+                                                }
+                                            }
+                                        },
+                                        "description": "The list of datatypes selected by the user along with their authorization status."
+                                    },
+                                    "emailExport": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user in the Export service. If you have not received it when loading the exchange popup, you must request it to the user inside the popup."
+                                    },
+                                    "emailImport": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user that is currently logged in to your platform."
+                                    },
+                                    "userKey": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The userKey for the User doing the exchange."
+                                    },
+                                    "serviceExport": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The name of the export service."
+                                    },
+                                    "purpose": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The id of the purpose for which this exchange is taking place."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consent created and sent to the export service.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "signedConsent": {
+                                            "type": "string",
+                                            "description": "The created signed consent sent to the export service."
+                                        },
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Consent signed and sent to the export service."
+                                        },
+                                        "followInfo": {
+                                            "type": "string",
+                                            "description": "A URL to a visionstrust web application page that allows you to follow the status of the consent."
+                                        },
+                                        "consentId": {
+                                            "type": "string",
+                                            "description": "The user's consent ID."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Consent paused and waiting on email validation sent to the user's email.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "verifyEmail": {
+                                            "type": "boolean"
+                                        },
+                                        "message": {
+                                            "type": "string"
+                                        },
+                                        "consentId": {
+                                            "type": "string",
+                                            "description": "The user's consent ID."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+        "/consents/exchange/export": {
+            "post": {
+                "summary": "Start export exchange.",
+                "description": "Creates a consent for the selected data and starts the export exchange process.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "datatypes": {
+                                        "required": true,
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "id": {
+                                                    "type": "string",
+                                                    "description": "The id of the datatype that you received when generating the popup."
+                                                },
+                                                "datatype": {
+                                                    "type": "string",
+                                                    "description": "The name of the datatype as you received it."
+                                                },
+                                                "checked": {
+                                                    "type": "boolean",
+                                                    "description": "If it has been selected or not by the user."
+                                                }
+                                            }
+                                        },
+                                        "description": "The list of datatypes selected by the user along with their authorization status."
+                                    },
+                                    "emailExport": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user currently logged in to your service / platform."
+                                    },
+                                    "emailImport": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The email of the user in the service importing the data. If you have not received it when fetching data to load the popup, you will need to request it to the user within the popup."
+                                    },
+                                    "userKey": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The userKey for the User doing the exchange."
+                                    },
+                                    "purpose": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The id of the purpose for which this exchange is taking place. This will be a reference to the import service's purpose."
+                                    },
+                                    "isNewAccount": {
+                                        "required": false,
+                                        "type": "boolean",
+                                        "description": "If the user has to create a new account in the import service and checks the 'I don't have an account in the import service' checkbox on the popup."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consent created and sent to the export service.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "description": "Consent signed and sent to the export service."
+                                        },
+                                        "followInfo": {
+                                            "type": "string",
+                                            "description": "A URL to a visionstrust web application page that allows you to follow the status of the consent."
+                                        },
+                                        "consentId": {
+                                            "type": "string",
+                                            "description": "The user's consent ID."
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "202": {
+                        "description": "Consent created but paused. Waiting on actions.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "oneOf": [
+                                        {
+                                            "description": "The consent was created but is waiting for the user to create an account in the import service to continue the exchange process.",
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "redirectionUrl": {
+                                                    "type": "string",
+                                                    "description": "The URL to redirect the user to for accound creation."
+                                                },
+                                                "consentId": {
+                                                    "type": "string",
+                                                    "description": "The user's consent ID."
+                                                }
+                                            }
+                                        },
+                                        {
+                                            "description": "The consent was created but is waiting for the user to validate his account with the email sent to his address.",
+                                            "type": "object",
+                                            "properties": {
+                                                "message": {
+                                                    "type": "string"
+                                                },
+                                                "emailImport": {
+                                                    "type": "string",
+                                                    "description": "The email address to who the verification email was sent."
+                                                },
+                                                "verifyEmail": {
+                                                    "type": "boolean"
+                                                },
+                                                "consentId": {
+                                                    "type": "string",
+                                                    "description": "The user's consent ID."
+                                                }
+                                            }
+                                        }
+                                    ]
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "401": {
+                        "description": "Authentication error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+        "/consents/exchange/token": {
+            "post": {
+                "summary": "Attach the access token to the consent.",
+                "description": "Attaches the access token to the consent, encrypts it and sends it to the consent import endpoint of the import service.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "consentId": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The ID of the consent you have previously decrypted."
+                                    },
+                                    "token": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The access token you generated."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Token attached to the consent and consent sent to the import service.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "message": {
+                                            "type": "string"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+        "/consents/exchange/validate": {
+            "post": {
+                "summary": "Verifies the validity of the consent and returns metadata",
+                "description": "Verifies the validity of the consent and returns metadata on the data to send to the import service.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "consentId": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The ID of the consent that you have received from the import service and decrypted."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consent verified + metadata of the data to send to the import service.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "verified": {
+                                            "type": "boolean",
+                                            "description": "If the verification of the consent was done successfully."
+                                        },
+                                        "userExport": {
+                                            "type": "object",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "userServiceId": {
+                                                    "type": "string",
+                                                    "description": "The ID of the user inside the export service database."
+                                                }
+                                            }
+                                        },
+                                        "userImport": {
+                                            "type": "object",
+                                            "properties": {
+                                                "email": {
+                                                    "type": "string"
+                                                },
+                                                "userServiceId": {
+                                                    "type": "string",
+                                                    "description": "The ID of the user inside the import service database."
+                                                }
+                                            }
+                                        },
+                                        "dataImportEndpoint": {
+                                            "type": "string",
+                                            "description": "The import service's endpoint to send the data to."
+                                        },
+                                        "datatypes": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "name": {
+                                                        "type": "string"
+                                                    },
+                                                    "table": {
+                                                        "type": "string",
+                                                        "description": "The name of the table / collection where the datatype data is stored."
+                                                    },
+                                                    "fields": {
+                                                        "type": "array",
+                                                        "items": {
+                                                            "type": "string",
+                                                            "description": "The fields in the table / collection corresponding to the specific data."
+                                                        }
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    }
+                }
+            }
+        },
+        "/consents/exchange/interop/verify": {
+            "post": {
+                "summary": "Verifies the signed consent and returns the endpoint of the Import Service to which the data should be sent.",
+                "description": "This endpoint only applies to interoperability services. When an interoperability service receives data on its data import endpoint, it should check with VisionsTrust to verify the signedConsent received and get the data import service's data import endpoint to know where to send the data after the interoperability process is done.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "signedConsent": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The signed consent as received from the Export Service on your data import endpoint."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Signed Consent verified, and returns data import url",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "dataImportUrl": {
+                                            "type": "string",
+                                            "description": "The data import url of the Import Service to which the data should be sent."
+                                        },
+                                        "verified": {
+                                            "type": "boolean",
+                                            "description": "If the signed consent has been properly verified"
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Resource not found error."
+                    },
+                    "409": {
+                        "description": "Consent already verified."
+                    }
+                }
+            }
+        },
+        "/consents/mapping/{consentId}": {
+            "get": {
+                "summary": "Get the data mapping for a Consent.",
+                "description": "Returns the data mapping you created for the data exchange concerned by the specified consent.",
+                "tags": ["Consents"],
+                "parameters": [
+                    {
+                        "in": "path",
+                        "name": "consentId",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        },
+                        "description": "The ID of the consent you will have received and decrypted on your data import endpoint."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "properties": {
+                                        "exportModel": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "datatype": {
+                                                        "type": "string",
+                                                        "description": "The name of the datatype."
+                                                    },
+                                                    "table": {
+                                                        "type": "string",
+                                                        "description": "The name of the table inside which the datatype is set."
+                                                    },
+                                                    "field": {
+                                                        "type": "string",
+                                                        "description": "The name of the field of the table that targets the data."
+                                                    }
+                                                }
+                                            }
+                                        },
+                                        "importModel": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "object",
+                                                "properties": {
+                                                    "datatype": {
+                                                        "type": "string",
+                                                        "description": "The name of the datatype."
+                                                    },
+                                                    "table": {
+                                                        "type": "string",
+                                                        "description": "The name of the table inside which the datatype is set."
+                                                    },
+                                                    "field": {
+                                                        "type": "string",
+                                                        "description": "The name of the field of the table that targets the data."
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    },
+                    "404": {
+                        "description": "No mapping found for this consent exchange."
+                    }
+                }
+            }
+        },
+        "/consents/exchange/verifiedaccount": {
+            "post": {
+                "summary": "Verifies the consent and re-enables the exchange process after creation of the user in import service.",
+                "description": "If a exchange process has been paused to wait for the creation of the user in the import service, this endpoint allows the process to continue after the user account creation.",
+                "tags": ["Consents"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "consentId": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The consent id you should have in the url parameters."
+                                    },
+                                    "userKey": {
+                                        "required": true,
+                                        "type": "string",
+                                        "description": "The userKey of the user you have just created."
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Consent verified and sent to the export service's '/consent/export/ endpoint."
+                    },
+                    "400": {
+                        "description": "Missing parameter error."
+                    },
+                    "403": {
+                        "description": "Unauthorized."
+                    },
+                    "404": {
+                        "description": "Consent not found in signedConsent"
+                    }
+                }
+            }
+        },
+
+        "/services": {
+            "get": {
+                "summary": "Get all services linked to Visionstrust",
+                "description": "Returns complete list of services that are linked to Visionstrust",
+                "tags": ["Services"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Service-other"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    }
+                }
+            }
+        },
+        "/services/info": {
+            "get": {
+                "summary": "Get your Service information",
+                "description": "Returns complete informaton about your service",
+                "tags": ["Services"],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Service-owned"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "$ref": "#/components/responses/UnauthorizedError"
+                    }
+                }
+            }
+        }
+    }
+}

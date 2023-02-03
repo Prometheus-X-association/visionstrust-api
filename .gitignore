@@ -1,0 +1,14 @@
+node_modules
+node_modules/*
+*.env
+dist
+dist/*
+logs
+logs/*
+
+.npmrc
+local
+keys/*
+!keys/README.md
+
+.fttemplates

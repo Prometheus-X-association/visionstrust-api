@@ -1,0 +1,23 @@
+{
+    "compilerOptions": {
+        "module": "commonjs",
+        "esModuleInterop": true,
+        "target": "es5",
+        "noImplicitAny": true,
+        "moduleResolution": "node",
+        "sourceMap": true,
+        "typeRoots": ["src/types/*/**"],
+        "outDir": "dist",
+        // "baseUrl": "src/",
+        // "paths": {
+        //     "@libs/*": ["libs/*"],
+        //     "@middleware/*": ["routes/middleware/*"],
+        //     "@routes/*": ["routes/*"],
+        //     "@controllers/*": ["controllers/*"],
+        //     "@loaders/*": ["loaders/*"],
+        //     "@config/*": ["config/*"]
+        // },
+        "resolveJsonModule": true
+    },
+    "include": ["src/**/*"]
+}

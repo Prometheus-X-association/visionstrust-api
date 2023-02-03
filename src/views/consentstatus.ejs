@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>ConsentStatus</title>
+        <style>
+            body {
+                min-height: 100vh;
+                min-width: 100vw;
+                overflow-x: hidden;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-orient: vertical;
+                -webkit-box-direction: normal;
+                -ms-flex-direction: column;
+                flex-direction: column;
+            }
+
+            .step {
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+            }
+
+            .round-number {
+                background: white;
+                font-size: 20px;
+                border-radius: 50%;
+                width: 50px;
+                height: 50px;
+                padding: 15px;
+                display: -webkit-box;
+                display: -ms-flexbox;
+                display: flex;
+                -webkit-box-pack: center;
+                -ms-flex-pack: center;
+                justify-content: center;
+                -webkit-box-align: center;
+                -ms-flex-align: center;
+                align-items: center;
+            }
+
+            .round-number-active {
+                border: none;
+                background: #1cd32b;
+            }
+
+            .round-number-completed {
+                border: 2px solid green;
+            }
+
+            .round-number-incomplete {
+                border: 2px solid red;
+            }
+
+            .details {
+                margin-left: 20px;
+            }
+        </style>
+    </head>
+    <body>
+        <div class="row-cols-1">
+            <h1 class="text-center">
+                Informations sur le consentement : <%= consent.id %>
+            </h1>
+        </div>
+        <div class="container-fluid row">
+            <div class="col-12 col-md-6">
+                <div class="container">
+                    <div class="details row-cols-1 mt-5">
+                        <h4>Statut et détails du consentement</h4>
+                        <ul>
+                            <li id="flow"></li>
+                            <li>
+                                Service Import : <%= consent.serviceImport %>
+                            </li>
+                            <li>Timestamp : <%= consent.timestamp %></li>
+                            <li>Code : <%= consent.status.followCode %></li>
+                            <li>Description : <%= consent.status.text %></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="container" id="statusContainer">
+                    <div id="step1" class="step mt-5">
+                        <div class="round-number">1</div>
+                        <div class="number-details">Placeholder</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container mt-5 col-12 col-md-6">
+                <h3>Référentiel des codes de suivi</h3>
+                <h4>Référentiel pour un consentement import</h4>
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <th>Code</th>
+                        <th>Message</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>1000</td>
+                            <td>Consent created.</td>
+                        </tr>
+                        <tr>
+                            <td>1100</td>
+                            <td>
+                                User identifiers and exchange data attached to
+                                consent.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1150</td>
+                            <td>
+                                Consent paused and waiting on email validation
+                                sent to the user.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>1200</td>
+                            <td>Consent verified.</td>
+                        </tr>
+                        <tr>
+                            <td>1300</td>
+                            <td>
+                                Consent signed and sent to the export service.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3000</td>
+                            <td>
+                                Token attached to consent and sent to the import
+                                service.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4000</td>
+                            <td>
+                                Consent verified and datatypes sent to the
+                                export service.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <h4>Référentiel pour un consentement export</h4>
+                <table class="table table-striped table-sm">
+                    <thead>
+                        <th>Code</th>
+                        <th>Message</th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>2000</td>
+                            <td>Consent created.</td>
+                        </tr>
+                        <tr>
+                            <td>2050</td>
+                            <td>
+                                User export identifier and exchange data
+                                attached to consent but user does not have an
+                                account in the import service. Consent paused
+                                and waiting on an account to be created.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2100</td>
+                            <td>
+                                User identifiers and exchange data attached to
+                                consent.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2150</td>
+                            <td>
+                                Consent paused and waiting on email validation
+                                sent to the user.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>2200</td>
+                            <td>Consent verified.</td>
+                        </tr>
+                        <tr>
+                            <td>2300</td>
+                            <td>
+                                Consent signed and sent to the export service.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>3000</td>
+                            <td>
+                                Token attached to consent and sent to the import
+                                service.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>4000</td>
+                            <td>
+                                Consent verified and datatypes sent to the
+                                export service.
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <script>
+            let consent = '<%- JSON.stringify(consent) %>';
+            consent = JSON.parse(consent);
+        </script>
+        <script>
+            /**
+             * updateStatus
+             *
+             * Copyright 2021 Visions
+             * Original Author: Felx Bole
+             * Date created : 23/04/2021
+             *
+             * Updates the consent status on document load
+             */
+            function updateStatus() {
+                const container = document.getElementById('statusContainer');
+
+                if (!consent.flow) {
+                    container.innerHTML =
+                        '<div class="alert alert-danger">Ce consentement a été créé avant les mises à jour permettant le suivi du consentement.</div>';
+                    return;
+                }
+
+                let codeList = [];
+
+                if (consent.flow === 1) {
+                    // Import
+                    codeList = [1000, 1100, 1150, 1200, 1300];
+                } else if (consent.flow === 2) {
+                    // Export
+                    codeList = [2000, 2050, 2100, 2200, 2300];
+                }
+
+                codeList.push(3000, 4000);
+
+                let html = '';
+                let index = 1;
+                let foundCurrent = false;
+                for (let code of codeList) {
+                    var active = '';
+                    var completed = '';
+
+                    if (consent.status.followCode == code) {
+                        active = 'round-number-active';
+                        foundCurrent = true;
+                    }
+
+                    if (foundCurrent && active == '') {
+                        completed = 'round-number-incomplete';
+                    } else if (!foundCurrent) {
+                        completed = 'round-number-completed';
+                    }
+
+                    html += `
+            <div id="step${index}" class="step mt-3">
+                <div class="round-number ${active} ${completed}">${index}</div>
+                <div class="details">
+                    <div class="code-details">Code : ${code}</div>`;
+                    if (active != '') {
+                        html += `<div class="code-description">${consent.status.text}</div>`;
+                    } else if (active == '' && foundCurrent == false) {
+                        html += `<div>Etape complétée.</div>`;
+                    }
+
+                    html += `
+                </div>
+            </div>`;
+
+                    index++;
+                }
+
+                container.innerHTML = html;
+            }
+
+            if (consent.flow == 1) {
+                document.getElementById('flow').innerHTML =
+                    'Consentement Import';
+            } else if (consent.flow == 2) {
+                document.getElementById('flow').innerHTML =
+                    'Consentement Export';
+            }
+
+            document.onload = updateStatus();
+        </script>
+    </body>
+</html>

@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Confirmation du compte</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link
+  href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+  rel="stylesheet"
+/>
+<link
+  href="https://fonts.googleapis.com/css?family=Montserrat"
+  rel="stylesheet"
+/>
+<link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.0.10/css/all.css"
+      integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+      crossorigin="anonymous"
+    />
+<link
+rel="stylesheet"
+href="https://cdnjs.cloudflare.com/ajax/libs/icheck-bootstrap/3.0.1/icheck-bootstrap.min.css"
+/>
+<style>
+    .nav {
+      background-color: #21BBEE !important;
+      padding: 7px;
+    }
+    .nav-link {
+      font-size: 16px !important;
+      color: #17243F !important;
+      font-weight: 500 !important;
+    }
+    .dropdown-item {
+      color: black !important;
+    }
+    .dropdown-item:hover {
+      color: gray !important;
+    }
+  
+    body {
+      background-color: #eee !important;
+    }
+    .content{
+        background-color:#fff;
+        padding:20px;
+        margin-top:40px;
+        border-radius:10px;
+    }
+  
+    .logo-visions {
+      width: 60px;
+      height: 40px;
+    }
+
+    .service-img{
+        width:100%;
+        height:100px;
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+    }
+    .user-img{
+        width:100%;
+        height:50px;
+        display: flex; 
+        align-items: center;
+        justify-content: center; 
+        margin-top:20px;
+    }
+    .user-img img{
+        height:80px;
+        width:80px;
+    }
+    
+
+    .service-img img {
+        height: 100%;
+    }
+  </style>
+    </head>
+    <body>
+        <div class="navbar navbar-expand-lg navbar-light nav">
+            <div class="container px-4">
+              <a href="/" class="navbar-brand" rel="home" title="Visions">
+                <img
+                  src="/images/visions-logo.svg"
+                  alt="Visions Logo"
+                  class="logo-visions"
+                />
+              </a>
+              <button
+                class="navbar-toggler"
+                type="button"
+                data-toggle="collapse"
+                data-target="#mobile-nav"
+                aria-controls="mobile-nav"
+                aria-expanded="false"
+              >
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="mobile-nav">
+                <ul class="navbar-nav ml-auto">
+                  
+                </ul>
+              </div>
+            </div>
+          </div>
+          
+
+        <div class="container content">
+            <div class="row d-flex align-items-center">
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title text-center text-warning font-weight-bold"><%= data.serviceExport %></h5>
+
+                         
+                          <table class="table">
+                            <tr>
+                                <td><i class="far fa-envelope fa-2x"></i></td>
+                                <td><span ><%= data.exportEmail %></span></td>
+                            </tr>
+                          </table>
+
+                          <table class="table">
+                            <% data.datatypes.forEach(function(item) {%>
+                              <tr>
+                                  <td><span class="h6"><%= item.name %> </span></td>
+                                  <% if(item.authorized){ %>
+                                    <td><i class="fas fa-toggle-on text-success fa-2x"></i></td>
+                                    <% }else{ %>
+                                    <td><i class="fas fa-toggle-off text-danger fa-2x"></i></td>
+                                  <% } %>
+                              </tr>
+                              <%});%>
+                          </table>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="user-img">
+                            <img src="/images/visions-logo.svg" alt="">
+                        </div>
+                        <div class="service-img">
+                            <i class="fas fa-arrow-right fa-3x text-warning" style="font-size:50px;"></i>
+                        </div>
+                        <div class="card-body">
+                            <table class="table">
+                              <tr>
+                                <td><i class="fas fa-file-alt fa-2x"></i></td>
+                                <td><span ><%= data.purpose %></span></td>
+                            </tr>
+                                <tr>
+                                    <td><i class="fas fa-calendar-alt fa-2x"></i></td>
+                                    <td><span ><%= moment(data.createdAt).format( 'DD - MMM - YYYY , h:mm:ss ')%></span></td>
+                                </tr>
+                                
+                            </table>
+                        </div>
+                      </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card" style="width: 18rem;">
+                        <div class="card-body">
+                          <h5 class="card-title text-center text-warning font-weight-bold"><%= data.serviceImport %></h5>
+                          
+                          <table class="table">
+                            <tr>
+                                <td><i class="fas fa-envelope  fa-2x"></i></td>
+                                <td><span ><%= data.importEmail %></span></td>
+                            </tr>
+                          </table>
+                          
+                        </div>
+                      </div>
+                </div>
+            </div>
+        </div>
+           
+    </body>
+</html>
