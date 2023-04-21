@@ -1,6 +1,6 @@
 # VisionsTrust Open Repository
 
-Open source project of VisionsTrust Data Intermediary APIs
+Open source project of VisionsTrust Data Intermediary APIs, V1 building block of Prometheus-X for catalog and consent management, see documentation [here](https://visionstrust.com/public/docs)
 
 ## Planned additions
 
